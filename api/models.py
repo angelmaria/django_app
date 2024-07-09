@@ -50,20 +50,20 @@ class Classes(models.Model):
 
 class Levels(models.Model):
     name = models.CharField(max_length=100)
-    _class = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE, db_column='class_id')
 
     def __str__(self):
-        return f"{self.name} - {self._class.name}"
+        return f"{self.name} - {self.class_id.name}"
 
     class Meta:
         db_table = 'Levels'
 
 class TeacherClasses(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    _class = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE, db_column='class_id')
 
     def __str__(self):
-        return f"{self.teacher.name} - {self._class.name}"
+        return f"{self.teacher.name} - {self.class_id.name}"
 
     class Meta:
         db_table = 'Teacher_Classes'
@@ -84,14 +84,14 @@ class Students(models.Model):
 
 class Enrollments(models.Model):
     student = models.ForeignKey(Students, on_delete=models.CASCADE)
-    _class = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE, db_column='class_id')
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, blank=True, null=True)
     level = models.ForeignKey(Levels, on_delete=models.CASCADE, blank=True, null=True)
     enrollment_date = models.DateField()
     class_number = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"{self.student.first_name} {self.student.last_name} - {self._class.name}"
+        return f"{self.student.first_name} {self.student.last_name} - {self.class_id.name}"
 
     class Meta:
         db_table = 'Enrollments'
@@ -109,10 +109,10 @@ class ClassPackDiscountRules(models.Model):
 
 class ClassPackClasses(models.Model):
     class_pack = models.ForeignKey(ClassPack, on_delete=models.CASCADE)
-    _class = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE, db_column='class_id')
 
     def __str__(self):
-        return f"{self.class_pack.name} - {self._class.name}"
+        return f"{self.class_pack.name} - {self.class_id.name}"
 
     class Meta:
         db_table = 'Class_Pack_Classes'
