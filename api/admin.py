@@ -1,15 +1,15 @@
 # En admin.py de tu app
 from django.contrib import admin
-from .models import Teacher, ClassPack, Instrument, Price, Classes, Levels, TeacherClasses, Students, Enrollments, ClassPackDiscountRules, ClassPackClasses
+from .models import Teacher, ClassPack, Instrument, Price, Class, Level, TeacherClass, Student, Enrollment, ClassPackDiscountRule, ClassPackClass
 
 admin.site.register(Teacher)
 admin.site.register(ClassPack)
 admin.site.register(Instrument)
 admin.site.register(Price)
-admin.site.register(Classes)
-admin.site.register(Levels)
-admin.site.register(TeacherClasses)
-admin.site.register(Students)
-admin.site.register(Enrollments)
-admin.site.register(ClassPackDiscountRules)
-admin.site.register(ClassPackClasses)
+admin.site.register(Class)
+admin.site.register(Level)
+admin.site.register(TeacherClass)
+admin.site.register(Student)
+admin.site.register(Enrollment)
+admin.site.register(ClassPackDiscountRule)
+admin.site.register(ClassPackClass)

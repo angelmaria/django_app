@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Teacher, ClassPack, Instrument, Price, Classes, Levels, TeacherClasses, Students, Enrollments, ClassPackDiscountRules, ClassPackClasses
+from .models import Teacher, ClassPack, Instrument, Price, Class, Level, TeacherClass, Student, Enrollment, ClassPackDiscountRule, ClassPackClass
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,37 +21,37 @@ class PriceSerializer(serializers.ModelSerializer):
         model = Price
         fields = '__all__'
 
-class ClassesSerializer(serializers.ModelSerializer):
+class ClassSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Classes
+        model = Class
         fields = '__all__'
 
-class LevelsSerializer(serializers.ModelSerializer):
+class LevelSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Levels
+        model = Level
         fields = '__all__'
 
-class TeacherClassesSerializer(serializers.ModelSerializer):
+class TeacherClassSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TeacherClasses
+        model = TeacherClass
         fields = '__all__'
 
-class StudentsSerializer(serializers.ModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Students
+        model = Student
         fields = '__all__'
 
-class EnrollmentsSerializer(serializers.ModelSerializer):
+class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Enrollments
+        model = Enrollment
         fields = '__all__'
 
-class ClassPackDiscountRulesSerializer(serializers.ModelSerializer):
+class ClassPackDiscountRuleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ClassPackDiscountRules
+        model = ClassPackDiscountRule
         fields = '__all__'
 
-class ClassPackClassesSerializer(serializers.ModelSerializer):
+class ClassPackClassSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ClassPackClasses
+        model = ClassPackClass
         fields = '__all__'
