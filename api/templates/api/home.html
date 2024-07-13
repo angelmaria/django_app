@@ -1,7 +1,16 @@
 {% extends 'api/base_generic.html' %}
 
 {% block content %}
-
+<style>
+    .popover {
+        max-width: 100%; /* Ensures popover content is fully visible */
+    }
+    
+    .popover-body {
+        white-space: normal; /* Ensures content wraps properly */
+    }
+</style>
+    
     <div class="container d-flex justify-content-center">
         <div class="center mt-3">
             <h1 class="text-muted fw-bold">Bienvenido a la Academia de Música Grupo 5</h1>
@@ -153,8 +162,13 @@
             <div class="col-md-6">
                 <div class="section-background">
                     <h2>Datos</h2>
-                    <a href="#" class="btn btn-info mt-3" id="queryMonthBtn" data-url="{% url 'execute_query_month' %}" data-bs-toggle="popover" data-bs-content="">Inscripciones mensuales</a>
-                    <a href="#" class="btn btn-primary mt-3" id="queryTotalDueBtn" data-url="{% url 'execute_query_total_due' %}" data-bs-toggle="popover" data-bs-content="">Total Deuda</a>
+                    <button id="queryMonthBtn" type="button" class="btn btn-primary" data-bs-toggle="popover" data-url="{% url 'query_results_month' %}">
+                        Inscripciones mensuales
+                    </button>
+                    
+                    <button id="queryTotalDueBtn" type="button" class="btn btn-primary" data-bs-toggle="popover" data-url="{% url 'query_results_total_due' %}">
+                        Deuda total
+                    </button>                    
                 </div>
             </div>
         </div>

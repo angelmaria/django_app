@@ -5,6 +5,7 @@ from .models import Teacher, ClassPack, Instrument, Price, Class, Level, Teacher
 from .serializers import TeacherSerializer, ClassPackSerializer, InstrumentSerializer, PriceSerializer, ClassSerializer, LevelSerializer, TeacherClassSerializer, StudentSerializer, EnrollmentSerializer, ClassPackDiscountRuleSerializer, ClassPackClassSerializer
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
+import json
 from .forms import EnrollmentForm, StudentForm, TeacherForm, InstrumentForm, ClassPackForm
 from django import forms
 from django.db import connection
@@ -276,4 +277,14 @@ class StudentForm(forms.ModelForm):
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
+        fields = '__all__'
+
+class InstrumentForm(forms.ModelForm):
+    class Meta:
+        model = Instrument
+        fields = '__all__'
+        
+class ClassPackForm(forms.ModelForm):
+    class Meta:
+        model = ClassPack
         fields = '__all__'

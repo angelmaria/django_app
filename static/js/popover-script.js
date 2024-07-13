@@ -1,44 +1,42 @@
-// popover-script.js
 document.addEventListener('DOMContentLoaded', function () {
-    // Event listener para el botón "Inscripciones mensuales"
-    document.getElementById('queryMonthBtn').addEventListener('click', async function (event) {
-        event.preventDefault(); // Evitar el redireccionamiento
-
-        try {
-            const url = this.getAttribute('data-url');
-            const response = await fetch(url);
-            const data = await response.json(); // Parsear la respuesta como JSON
-
-            // Mostrar el popover con el contenido obtenido
-            $(this).popover({
-                content: JSON.stringify(data), // Ajusta la lógica según el formato de tus datos
-                html: true,
-            });
-            $(this).popover('show'); // Mostrar el popover
-        } catch (error) {
-            console.error('Error al obtener los datos:', error);
-            // Manejar errores o mostrar un mensaje de error en el popover
-        }
-    });
-
-    // Event listener para el botón "Total Deuda"
-    document.getElementById('queryTotalDueBtn').addEventListener('click', async function (event) {
-        event.preventDefault(); // Evitar el redireccionamiento
-
-        try {
-            const url = this.getAttribute('data-url');
-            const response = await fetch(url);
-            const data = await response.json(); // Parsear la respuesta como JSON
-
-            // Mostrar el popover con el contenido obtenido
-            $(this).popover({
-                content: JSON.stringify(data), // Ajusta la lógica según el formato de tus datos
-                html: true,
-            });
-            $(this).popover('show'); // Mostrar el popover
-        } catch (error) {
-            console.error('Error al obtener los datos:', error);
-            // Manejar errores o mostrar un mensaje de error en el popover
-        }
+    var popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
+    
+    popovers.forEach(function (popover) {
+        popover.addEventListener('click', function () {
+            var url = popover.getAttribute('data-url');
+            
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    if (data.trim() === '') {
+                        data = 'No se encontró contenido';
+                    }
+                    
+                    // Actualizamos el contenido del popover
+                    popover.setAttribute('data-bs-content', data);
+                    
+                    // Creamos una instancia de Popover de Bootstrap
+                    var popoverInstance = new bootstrap.Popover(popover);
+                    
+                    // Mostramos el popover
+                    popoverInstance.show();
+                    
+                    // Cerramos el popover cuando se hace clic fuera de él
+                    document.addEventListener('click', function closePopover(event) {
+                        if (!popover.contains(event.target)) {
+                            popoverInstance.hide();
+                            document.removeEventListener('click', closePopover);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching or displaying data:', error);
+                });
+        });
     });
 });
