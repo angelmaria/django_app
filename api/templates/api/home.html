@@ -153,8 +153,8 @@
             <div class="col-md-6">
                 <div class="section-background">
                     <h2>Datos</h2>
-                    <a href="{% url 'execute_query_month' %}" class="btn btn-info mt-3">Inscripciones mensuales</a>
-                    <a href="{% url 'execute_query_total_due' %}" class="btn btn-primary mt-3">Total Deuda</a>
+                    <a href="#" class="btn btn-info mt-3" id="queryMonthBtn" data-url="{% url 'execute_query_month' %}" data-bs-toggle="popover" data-bs-content="">Inscripciones mensuales</a>
+                    <a href="#" class="btn btn-primary mt-3" id="queryTotalDueBtn" data-url="{% url 'execute_query_total_due' %}" data-bs-toggle="popover" data-bs-content="">Total Deuda</a>
                 </div>
             </div>
         </div>

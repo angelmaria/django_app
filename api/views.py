@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from .models import Teacher, ClassPack, Instrument, Price, Class, Level, TeacherClass, Student, Enrollment, ClassPackDiscountRule, ClassPackClass
 from .serializers import TeacherSerializer, ClassPackSerializer, InstrumentSerializer, PriceSerializer, ClassSerializer, LevelSerializer, TeacherClassSerializer, StudentSerializer, EnrollmentSerializer, ClassPackDiscountRuleSerializer, ClassPackClassSerializer
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .forms import EnrollmentForm, StudentForm, TeacherForm, InstrumentForm, ClassPackForm
 from django import forms
 from django.db import connection
@@ -208,7 +208,11 @@ def execute_query_month(request):
         columns = [col[0] for col in cursor.description]
         data = cursor.fetchall()
 
-    return render(request, 'api/query_results_month.html', {'columns': columns, 'data': data})
+    response_data = {
+    'columns': columns,
+    'data': list(data),  # Convertir a lista si no lo está
+    }
+    return JsonResponse(response_data)
 
 def execute_query_total_due(request):
     with connection.cursor() as cursor:
@@ -251,7 +255,12 @@ def execute_query_total_due(request):
         columns = [col[0] for col in cursor.description]
         data = cursor.fetchall()
 
-    return render(request, 'api/query_results_total_due.html', {'columns': columns, 'data': data})
+    # Devolver JSON response
+    response_data = {
+        'columns': columns,
+        'data': list(data),  # Convertir a lista si no lo está
+    }
+    return JsonResponse(response_data)
 
 
 class EnrollmentForm(forms.ModelForm):
