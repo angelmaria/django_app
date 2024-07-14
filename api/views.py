@@ -5,7 +5,7 @@ from .models import Teacher, ClassPack, Instrument, Price, Class, Level, Teacher
 from .serializers import TeacherSerializer, ClassPackSerializer, InstrumentSerializer, PriceSerializer, ClassSerializer, LevelSerializer, TeacherClassSerializer, StudentSerializer, EnrollmentSerializer, ClassPackDiscountRuleSerializer, ClassPackClassSerializer
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .forms import EnrollmentForm, StudentForm, TeacherForm, InstrumentForm, ClassPackForm
+from .forms import EnrollmentForm, StudentForm, TeacherForm, InstrumentForm, ClassPackForm, PriceForm
 from django import forms
 from django.db import connection
 
@@ -223,6 +223,17 @@ def delete_student(request, pk):
         'student': student
     }
     return render(request, 'api/confirm_delete.html', context)
+
+def edit_price(request, pk):
+    price = get_object_or_404(Price, pk=pk)
+    if request.method == 'POST':
+        form = PriceForm(request.POST, instance=price)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = PriceForm(instance=price)
+    return render(request, 'api/edit_price.html', {'form': form, 'price': price})
 
 def execute_query_month(request):
     with connection.cursor() as cursor:

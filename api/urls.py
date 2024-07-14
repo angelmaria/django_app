@@ -34,4 +34,5 @@ urlpatterns = [
     path('delete_instrument/<int:pk>/', views.delete_instrument, name='confirm_delete_instrument'),
     path('edit_student/<int:pk>/', views.edit_student, name='edit_student'),
     path('delete_student/<int:pk>/', views.delete_student, name='confirm_delete_student'),
+    path('edit_price/<int:pk>/', views.edit_price, name='edit_price'),
 ]
