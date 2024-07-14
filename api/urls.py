@@ -30,4 +30,6 @@ urlpatterns = [
     path('create_class_pack/', views.create_class_pack, name='create_class_pack'),
     path('edit_class_pack/<int:pk>/', views.edit_class_pack, name='edit_class_pack'),
     path('delete_class_pack/<int:pk>/', views.delete_class_pack, name='confirm_delete_class_pack'),
+    path('edit_instrument/<int:pk>/', views.edit_instrument, name='edit_instrument'),
+    path('delete_instrument/<int:pk>/', views.delete_instrument, name='confirm_delete_instrument'),
 ]

@@ -180,6 +180,28 @@ def delete_class_pack(request, pk):
     }
     return render(request, 'api/confirm_delete.html', context)
 
+def edit_instrument(request, pk):
+    instrument = get_object_or_404(Instrument, pk=pk)
+    if request.method == 'POST':
+        form = InstrumentForm(request.POST, instance=instrument)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirige a donde quieras después de editar
+    else:
+        form = InstrumentForm(instance=instrument)
+    return render(request, 'api/edit_instrument.html', {'form': form})
+
+def delete_instrument(request, pk):
+    instrument = get_object_or_404(Instrument, pk=pk)
+    if request.method == 'POST':
+        instrument.delete()
+        return redirect('home')  # Redirige a donde quieras después de borrar
+    context = {
+    'object_type': 'Instrumento',  # Especifica aquí el tipo de objeto que estás eliminando
+    'instrument': instrument
+    }
+    return render(request, 'api/confirm_delete.html', context)
+
 def execute_query_month(request):
     with connection.cursor() as cursor:
         # Configurar el idioma español para la conexión
