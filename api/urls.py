@@ -32,4 +32,6 @@ urlpatterns = [
     path('delete_class_pack/<int:pk>/', views.delete_class_pack, name='confirm_delete_class_pack'),
     path('edit_instrument/<int:pk>/', views.edit_instrument, name='edit_instrument'),
     path('delete_instrument/<int:pk>/', views.delete_instrument, name='confirm_delete_instrument'),
+    path('edit_student/<int:pk>/', views.edit_student, name='edit_student'),
+    path('delete_student/<int:pk>/', views.delete_student, name='confirm_delete_student'),
 ]

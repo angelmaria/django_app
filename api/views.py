@@ -202,6 +202,28 @@ def delete_instrument(request, pk):
     }
     return render(request, 'api/confirm_delete.html', context)
 
+def edit_student(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'api/edit_student.html', {'form': form})
+
+def delete_student(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('home')
+    context = {
+        'object_type': 'alumno',
+        'student': student
+    }
+    return render(request, 'api/confirm_delete.html', context)
+
 def execute_query_month(request):
     with connection.cursor() as cursor:
         # Configurar el idioma español para la conexión
